@@ -2,20 +2,20 @@
 <?php
 require_once '../DTO/Project.php';
 require_once '../BLL/Project.php';
-$projectDTO = new \DTO\Project();
 ?>
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Gerencimento de Projetos</title>
+        <title>iK | Projects</title>
     </head>
-    <body>
-        <h1>Gerenciamento de Projetos</h1>
+    <body>        
+        <h2>Manager Your Projects</h2>        
+        <p>
+            <a href="users.php">Users</a> |
+            <a href="">Projects</a> |
+        </p>
         <?php
-        $projectDTO->manager = "Isaias Lima";
-        $projectDTO->contractor ="Jericó";
-        $projectBLL = new \BLL\Project($projectDTO);
-        $projectBLL->insertProject();
+        
         ?>
     </body>
 </html>

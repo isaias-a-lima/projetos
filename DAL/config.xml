@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <name>Data Base Configuration</name>
+    <host>iKDesigns01-PC</host>
+    <database>projetos</database>
+    <user>teste</user>
+    <password>teste</password>
+</config>

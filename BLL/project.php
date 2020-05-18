@@ -1,10 +1,16 @@
 <?php
 
-namespace DAL;
+namespace BLL;
+
+require_once '../DAL/Project.php';
 
 class Project {
     
-    function insertProject($project){
+    function __construct() {
+        $projectDAL = new \DAL\Project();
+    }
+            
+    function insertProject($projectDTO){
         
     }
     
@@ -27,5 +33,5 @@ class Project {
     function calculateTotalCost($project){
         
     }
-    
 }
+?>
