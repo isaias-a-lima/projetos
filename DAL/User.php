@@ -17,6 +17,7 @@ class User {
         }else{
             return $sql . mysqli_error($link);
         }
+        mysqli_close($link);
     }
     
     function editUser(){
@@ -28,7 +29,16 @@ class User {
     }
     
     function selectUser(){
-        
+        $conn = new \DAL\Connection();
+        $sql = "";
+        $link = $conn->link;
+        $result = mysqli_query($link, $sql);
+        if(mysqli_affected_rows($link) > 0){
+            return $result;
+        }else{
+            return $sql . "<br>" . mysqli_error($link) . "<br>";
+        }
+        mysqli_close($link);
     }
     
     function listUsers(){
@@ -41,5 +51,21 @@ class User {
         }else{
             return $sql . "<BR>" . mysqli_error($link) . "<BR>";
         }
+        mysqli_close($link);
+    }
+    
+    function login($userDTO){
+        $email = $userDTO->getUserMail();
+        $password = $userDTO->getUserPassword();
+        $conn = new \DAL\Connection();
+        $sql = "CALL USER_LOGIN ('$email','$password')";
+        $link = $conn->link;
+        $result = mysqli_query($link, $sql);
+        if(mysqli_affected_rows($link) > 0){
+            return $result;
+        }else{
+            return "Error: " . $sql . "<br>" . mysqli_error($link) . "<br>";
+        }
+        mysqli_close($link);
     }
 }

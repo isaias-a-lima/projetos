@@ -7,7 +7,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $userBLL = new \BLL\User();
     $res = $userBLL->insertUser($userDTO);
     if(is_numeric($res)){
-        header("Location:../ui/users.php");
+        header("Location:../ui/sign_in.php");
     }else{
         echo $res;
     }
@@ -16,7 +16,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>iK | Projects | Users</title>
+        <title>iK Projects | Create Account</title>
         
         <script>
             function saving(){
@@ -40,22 +40,23 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         </script>
     </head>
     <body>
-        <h2>Manager Your Projects</h2>
-        <h3>New User</h3>
+        <h2>iK Projects</h2>
+        <h3>Create an account</h3>
         <p>
-            <a href="../ui/users.php">Voltar</a> |            
+            <a href="../ui/">Home</a> |          
+            <a href="../ui/sign_in.php">Sign-In</a> |
         </p>
         
         <form id="form_user" method="post" accept-charset="utf-8">
             <label for="userName">Name</label><br>
             <input type="text" id="userName" name="userName"><br>
             
-            <label for="userMail">Mail</label><br>
+            <label for="userMail">Email</label><br>
             <input type="text" id="userMail" name="userMail"><br>
             
             <label for="userPassword">Password</label><br>
             <input type="password" id="userPassword" name="userPassword"><br>
-            <br>
+            
             <button type="button" onclick="saving()">Save</button>
         </form>
     </body>

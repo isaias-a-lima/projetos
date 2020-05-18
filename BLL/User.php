@@ -19,12 +19,38 @@ class User {
         
     }
     
-    function selectUser(){
-        
+    function selectUser($userDTO){
+        $userDAL = new \DAL\User();
+        return $userDAL->selectUser();
     }
     
     function listUsers(){
         $userDAL = new \DAL\User();
         return $userDAL->listUsers();
+    }
+    
+    function login($userDTO){
+        $userDAL = new \DAL\User();
+        $result = $userDAL->login($userDTO);
+        if(is_array($result) || is_object($result)){
+            session_start();
+            while ($row = $result->fetch_assoc()){
+                $_SESSION['userId'] = $row['user_id'];
+                $_SESSION['userName'] = $row['user_name'];
+                $_SESSION['userMail'] = $row['user_mail'];
+            }
+            return 1;
+        }else{
+            return $result;
+        }
+    }
+    
+    function logout(){
+        session_start();
+        session_unset();
+        session_destroy();
+        if(!isset($_SESSION['userName'])){
+            return true;
+        }        
     }
 }
