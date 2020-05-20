@@ -12,6 +12,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         echo $res;
     }
 }
+
+$todayDate = date("Ymd");
 ?>
 <html>
     <head>
@@ -20,6 +22,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         
         <script>
             function saving(){
+                var signDate = document.getElementById("signDate");
                 var userName = document.getElementById("userName");
                 var userMail = document.getElementById("userMail");
                 var userPassword = document.getElementById("userPassword");
@@ -33,6 +36,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                 }else if(userPassword.value.length < 1){
                     alert("Campo obrigatório!");
                     userPassword.focus();
+                }else if(signDate.value.length < 1){
+                    alert("Date is required!")
                 }else{
                     form_user.submit();
                 }
@@ -48,6 +53,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         </p>
         
         <form id="form_user" method="post" accept-charset="utf-8">
+            
+            <input type="hidden" name="signDate" id="signDate" value="<?=$todayDate?>">
+            
             <label for="userName">Name</label><br>
             <input type="text" id="userName" name="userName"><br>
             

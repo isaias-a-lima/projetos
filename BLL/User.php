@@ -11,8 +11,9 @@ class User {
         return $userDAL->insertUser($userDTO);
     }
     
-    function editUser(){
-        
+    function editUser($userDTO){
+        $userDAL = new \DAL\User();
+        return $userDAL->editUser($userDTO);
     }
     
     function deleteUser(){
@@ -21,7 +22,7 @@ class User {
     
     function selectUser($userDTO){
         $userDAL = new \DAL\User();
-        return $userDAL->selectUser();
+        return $userDAL->selectUser($userDTO);
     }
     
     function listUsers(){

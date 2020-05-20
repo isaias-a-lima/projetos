@@ -10,7 +10,7 @@ require_once '../BLL/User.php';
     </head>
     <body>
         
-        <h2>Manager Your Projects</h2>
+        <h2>iK Projects</h2>
         <h3>Users</h3>
         
         <p>

@@ -4,12 +4,17 @@ namespace DTO;
 
 class User {
     private $userId;
+    private $signDate;
     private $userName;
     private $userMail;
     private $userPassword;
     
     function getUserId() {
         return $this->userId;
+    }
+    
+    function getSignDate(){
+        return $this->signDate;
     }
 
     function getUserName() {
@@ -27,6 +32,10 @@ class User {
     function setUserId($userId) {
         $this->userId = $userId;
     }
+    
+    function setSignDate($signDate){
+        $this->signDate = $signDate;
+    }
 
     function setUserName($userName) {
         $this->userName = $userName;
@@ -41,7 +50,8 @@ class User {
     }
     
     function __construct($user) {
-        $this->userId = $user['userID'];
+        $this->userId = $user['userId'];
+        $this->signDate = $user['signDate'];
         $this->userName = $user['userName'];
         $this->userMail = $user['userMail'];
         $this->userPassword = $user['userPassword'];

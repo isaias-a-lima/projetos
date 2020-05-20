@@ -1,14 +1,12 @@
 <?php
 
-namespace dto;
+namespace DTO;
 
 class Project {
     private $projectId;
+    private $userId;
     private $title;
-    private $contractor;
-    private $manager;
-    private $managerMail;
-    private $managerPassword;
+    private $contractor;    
     private $projectType;
     private $visibility;
     private $initialDate;
@@ -21,24 +19,16 @@ class Project {
         return $this->projectId;
     }
 
+    function getUserId() {
+        return $this->userId;
+    }
+
     function getTitle() {
         return $this->title;
     }
 
     function getContractor() {
         return $this->contractor;
-    }
-
-    function getManager() {
-        return $this->manager;
-    }
-
-    function getManagerMail() {
-        return $this->managerMail;
-    }
-
-    function getManagerPassword() {
-        return $this->managerPassword;
     }
 
     function getProjectType() {
@@ -73,24 +63,16 @@ class Project {
         $this->projectId = $projectId;
     }
 
+    function setUserId($userId) {
+        $this->userId = $userId;
+    }
+
     function setTitle($title) {
         $this->title = $title;
     }
 
     function setContractor($contractor) {
         $this->contractor = $contractor;
-    }
-
-    function setManager($manager) {
-        $this->manager = $manager;
-    }
-
-    function setManagerMail($managerMail) {
-        $this->managerMail = $managerMail;
-    }
-
-    function setManagerPassword($managerPassword) {
-        $this->managerPassword = $managerPassword;
     }
 
     function setProjectType($projectType) {
@@ -120,5 +102,20 @@ class Project {
     function setProjectStatus($projectStatus) {
         $this->projectStatus = $projectStatus;
     }
+    
+    function __construct($dados) {
+        $this->projectId = $dados['projectId'];
+        $this->userId = $dados['userId'];
+        $this->title = $dados['title'];
+        $this->contractor = $dados['contractor'];
+        $this->projectType = $dados['projectType'];
+        $this->visibility = $dados['visibility'];
+        $this->initialDate = $dados['initialDate'];
+        $this->estimatedDate = $dados['estimatedDate'];
+        $this->finalDate = $dados['finalDate'];
+        $this->totalCost = $dados['totalCost'];
+        $this->projectStatus = $dados['projectStatus'];
+    }
+
 }
 ?>

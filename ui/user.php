@@ -17,9 +17,9 @@ include '../ui/session.php';
         <h3>User area</h3>
         
         <nav>
-            <a href="../ui/">Home</a> |            
-            <a href="projects.php">Projects</a> |
-            <a href="projects_new.php">New Project</a> |
+            <a href="../ui/">Home</a> |
+            <a href="user_edit.php">Edit account</a> |
+            <a href="">Change password</a> |
             <a href="?p=exit">Exit</a> |
         </nav>
         
