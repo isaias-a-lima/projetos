@@ -25,8 +25,7 @@ class Project {
             return mysqli_insert_id($link);
         }else{
             return "Erro: $sql <br> " . mysqli_error($link) . "<br>";
-        }
-        mysqli_close($link);        
+        }            
     }
     
     function editProject(){

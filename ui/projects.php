@@ -3,6 +3,7 @@ $logRequired = true;
 include '../ui/session.php';
 require_once '../BLL/project.php';
 require_once '../DTO/project.php';
+require_once '../BLL/Funcs.php';
 ?>
 <!DOCTYPE html>
 
@@ -31,6 +32,8 @@ require_once '../DTO/project.php';
                 <th>Id</th><th>Title</th><th>Type</th><th>Visibility</th><th>Estimated</th><th>Status</th><th>&nbsp;</th>
             </tr>
         <?php
+        $funcs = new \BLL\Funcs();
+        
         $projectDTO = new \DTO\Project();
         $projectDTO->setUserId($userId);
         
@@ -42,7 +45,7 @@ require_once '../DTO/project.php';
             echo "<td>" . $row['title'] ."</td>";
             echo "<td>" . $row['project_type'] ."</td>";
             echo "<td>" . $row['visibility'] ."</td>";
-            echo "<td>" . $projectBLL->changeDate($row['estimated_date']) ."</td>";
+            echo "<td>" . $funcs->changeDate($row['estimated_date']) ."</td>";
             echo "<td>" . $row['project_status'] ."</td>";
             echo '<td><button type="button">See</button></td>';
             echo "</tr>";

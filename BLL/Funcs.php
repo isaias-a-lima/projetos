@@ -5,6 +5,8 @@ namespace BLL;
 class Funcs {
     
     function changeDate($date, $target){
+        // == 0  print on browser
+        // >= 1  save in data base
         if($target == 0 || empty($target)){
             if(empty($date)){
                 return '';
