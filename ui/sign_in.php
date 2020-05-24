@@ -11,7 +11,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
         $userBLL = new \BLL\User();
         $res = $userBLL->login($userDTO);
         if($res == 1){
-            header("Location:../ui/user.php");
+            header("Location:../ui/");
         }else{
             $alert = substr($res, 0, 30) . "...";
         }
@@ -23,11 +23,11 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>iK Projects | Sign-In</title>
+        <title>iK | Sign-In</title>
     </head>
     <body>
         <h2>iK Projects</h2>
-        <h3>Sign-In</h3>
+        
         <nav>
             <a href="../ui/">Home</a> |
             <a href="user_new.php">Create an account</a> |
@@ -37,7 +37,9 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
             -->
         </nav>
         
-        <p><?=$alert?>&nbsp;</p>
+        <p><?=$alert?></p>
+        
+        <h3>Sign-In</h3>
         
         <form id="form_sign_in" method="post" accept-charset="utf-8" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
             <label for="userMail">Email</label><br>

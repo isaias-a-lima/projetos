@@ -10,33 +10,43 @@ require_once '../BLL/Funcs.php';
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>iK Projects | Home</title>
+        <title>iK | Home</title>
+        <script>
+            function view(id){
+                var id = id;
+                if(id !== "" && id !== null){
+                    document.getElementById("projectId").value = id;
+                    document.getElementById("form_project").submit();
+                }else{
+                    alert("Project id do not to be null!");
+                }
+            }
+        </script>
     </head>
     <body>
         <div><?=$logged?>&nbsp;</div>
         <hr>
         
         <h2>iK Projects</h2>
-        <h3>Public Projects</h3>
+        
         <nav>
-            <a href="projects.php">Projects</a> |
-            <a href="user.php">User area</a> |
             <?php
             if($logStatus==1){
-                echo '<!--';
-            }
             ?>
+            <a href="projects.php">My projects</a> |
+            <a href="user.php">User area</a> |
+            <a href="?p=exit">Exit</a> |
+            <?php
+            }else{
+            ?>            
             <a href="sign_in.php">Sign-In</a> |
             <a href="user_new.php">Create an account</a> |
             <?php
-            if($logStatus==1){
-                echo '-->';
-                echo '<a href="?p=exit">Exit</a>';
             }
-            ?>            
+            ?>
         </nav>
         
-        <p>&nbsp;</p>
+        <h3>Public projects</h3>
         
         <table border="1" cellspacing="0">
             <tr>
@@ -61,5 +71,8 @@ require_once '../BLL/Funcs.php';
         }
         ?>        
         </table>
+        <form id="form_project" method="post" accept-charset="utf-8" action="project_view_public.php">
+            <input type="hidden" name="projectId" id="projectId">
+        </form>
     </body>
 </html>

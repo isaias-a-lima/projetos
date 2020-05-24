@@ -10,7 +10,7 @@ require_once '../BLL/Funcs.php';
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>iK Projects | Projects</title>
+        <title>iK | My projects</title>
         <script>
             function view(id){
                 var id = id;
@@ -28,7 +28,6 @@ require_once '../BLL/Funcs.php';
         <hr>
         
         <h2>iK Projects</h2>
-        <h3>Projects</h3>
         
         <nav>
             <a href="../ui/">Home</a> |
@@ -36,7 +35,9 @@ require_once '../BLL/Funcs.php';
             <a href="?p=exit">Exit</a> |
         </nav>
         
-        <p><?=$alert?>&nbsp;</p>
+        <p><?=$alert?></p>
+        
+        <h3>My projects</h3>
         
         <table border="1" cellspacing="0">
             <tr>
@@ -61,7 +62,7 @@ require_once '../BLL/Funcs.php';
             echo "<td><button type='button' onclick='view(".$row['project_id'].")'>View</button></td>";
             echo "</tr>";
         }
-        ?>        
+        ?>
         </table>
         <form id="form_project" method="post" accept-charset="utf-8" action="project_view.php">
             <input type="hidden" name="projectId" id="projectId">

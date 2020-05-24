@@ -1,5 +1,5 @@
 <?php
-$logRequired = true;
+$logRequired = false;
 include '../ui/session.php';
 
 require_once '../BLL/Funcs.php';
@@ -43,7 +43,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>iK | Project view</title>
+        <title>iK | Public project view</title>
     </head>
     <body>
         <div><?=$logged?>&nbsp;</div>
@@ -52,14 +52,12 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         <h2>iK Projects</h2>
         
         <nav>
-            <a href="../ui/">Home</a> |
-            <a href="projects.php">My projects</a> |            
-            <a href="?p=exit">Exit</a> |
+            <a href="../ui/">Home</a> |            
         </nav>
         
         <p><?=$alert?></p>
         
-        <h3>My projects | Project view</h3>
+        <h3>This is a public project.</h3>
         
         <table border="1" cellspacing="0">
             <tr><th colspan="2">Project Title</th></tr>

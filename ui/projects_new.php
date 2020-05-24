@@ -37,22 +37,23 @@ include '../ui/session.php';
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>iK Projects | Create a project</title>
+        <title>iK | Create a project</title>
     </head>
     <body>
         <div><?=$logged?>&nbsp;</div>
         <hr>
         
-        <h2>iK Projects</h2>
-        <h3>Projects | Create a project</h3>
+        <h2>iK Projects</h2>        
         
         <nav>
             <a href="../ui/">Home</a> |
-            <a href="projects.php">Projects</a> |            
+            <a href="projects.php">My projects</a> |            
             <a href="?p=exit">Exit</a> |
         </nav>
         
-        <p><?=$alert?>&nbsp;</p>
+        <p><?=$alert?></p>
+        
+        <h3>My projects | Create a project</h3>
         
         <form id="form_project" method="post" accept-charset="utf-8" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
             

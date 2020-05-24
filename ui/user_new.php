@@ -18,7 +18,7 @@ $todayDate = date("Ymd");
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>iK Projects | Create Account</title>
+        <title>iK | Create an account</title>
         
         <script>
             function saving(){
@@ -46,11 +46,15 @@ $todayDate = date("Ymd");
     </head>
     <body>
         <h2>iK Projects</h2>
-        <h3>Create an account</h3>
-        <p>
+        
+        <nav>
             <a href="../ui/">Home</a> |          
             <a href="../ui/sign_in.php">Sign-In</a> |
-        </p>
+        </nav>
+        
+        <p><?=$alert?></p>
+        
+        <h3>Create an account</h3>
         
         <form id="form_user" method="post" accept-charset="utf-8">
             
