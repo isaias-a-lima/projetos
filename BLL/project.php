@@ -32,13 +32,15 @@ class Project {
         
     }
     
-    function selectProject($project){
-        
+    function selectProject($projectDTO){
+        $projectDAL = new \DAL\Project();
+        $res = $projectDAL->selectProject($projectDTO);
+        return $res;
     }
     
-    function listProject($projectDTO){
+    function listProject($projectDTO, $option){
         $projectDAL = new \DAL\Project();
-        $res = $projectDAL->listProject($projectDTO);
+        $res = $projectDAL->listProject($projectDTO, $option);
         return $res;
     }
     

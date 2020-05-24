@@ -11,6 +11,17 @@ require_once '../BLL/Funcs.php';
     <head>
         <meta charset="UTF-8">
         <title>iK Projects | Projects</title>
+        <script>
+            function view(id){
+                var id = id;
+                if(id !== "" && id !== null){
+                    document.getElementById("projectId").value = id;
+                    document.getElementById("form_project").submit();
+                }else{
+                    alert("Project id do not to be null!");
+                }
+            }
+        </script>
     </head>
     <body>
         <div><?=$logged?>&nbsp;</div>
@@ -46,11 +57,14 @@ require_once '../BLL/Funcs.php';
             echo "<td>" . $row['project_type'] ."</td>";
             echo "<td>" . $row['visibility'] ."</td>";
             echo "<td>" . $funcs->changeDate($row['estimated_date']) ."</td>";
-            echo "<td>" . $row['project_status'] ."</td>";
-            echo '<td><button type="button">See</button></td>';
+            echo "<td>" . $row['project_status'] ."</td>";            
+            echo "<td><button type='button' onclick='view(".$row['project_id'].")'>View</button></td>";
             echo "</tr>";
         }
-        ?>            
+        ?>        
         </table>
+        <form id="form_project" method="post" accept-charset="utf-8" action="project_view.php">
+            <input type="hidden" name="projectId" id="projectId">
+        </form>
     </body>
 </html>

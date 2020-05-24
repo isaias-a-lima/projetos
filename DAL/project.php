@@ -36,14 +36,27 @@ class Project {
         
     }
     
-    function selectProject(){
-        
+    function selectProject($projectDTO){
+        $projectId = $projectDTO->getProjectId();
+        $conn = new \DAL\Connection();        
+        $sql = "CALL PROJECT_SELECT($projectId)";
+        $link = $conn->link;
+        $result = mysqli_query($link, $sql);
+        if(mysqli_affected_rows($link) > 0){
+            return $result;
+        }else{
+            return "Erro: $sql <br> " . mysqli_error($link) . "<br>";
+        }        
     }
     
-    function listProject($projectDTO){
+    function listProject($projectDTO, $option){
         $conn = new \DAL\Connection();
         $user_id = $projectDTO->getUserId();
-        $sql = "CALL PROJECTS_LIST($user_id)";
+        if($option==0 || empty($option)){
+            $sql = "CALL PROJECTS_LIST($user_id)";
+        }else{
+            $sql = "CALL PROJECTS_LIST_VISIBILITY('public')";
+        }        
         $link = $conn->link;
         $result = mysqli_query($link, $sql);
         if(mysqli_affected_rows($link) > 0){

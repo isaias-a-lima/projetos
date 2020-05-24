@@ -44,7 +44,7 @@ include '../ui/session.php';
         <hr>
         
         <h2>iK Projects</h2>
-        <h3>Projects => Create a project</h3>
+        <h3>Projects | Create a project</h3>
         
         <nav>
             <a href="../ui/">Home</a> |
