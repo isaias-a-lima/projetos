@@ -86,4 +86,18 @@ class User {
         }
         mysqli_close($link);
     }
+    
+    function changePassword($userDTO,$newPassword){
+        $userId = $userDTO->getUserId();
+        $password = $userDTO->getUserPassword();
+        $sql = "CALL USER_CHANGE_PASSWORD($userId,$password,$newPassword)";
+        $conn = new \DAL\Connection();
+        $link = $conn->link;
+        mysqli_query($link, $sql);
+        if(mysqli_affected_rows($link) > 0){
+            return true;
+        }else{
+            return "Error: " . $sql . "<br>" . mysqli_error($link) . "<br>";
+        }
+    }
 }

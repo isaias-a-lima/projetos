@@ -20,8 +20,9 @@ if($_GET['p'] == 'exit'){
     require_once '../BLL/User.php';
     $userBLL = new \BLL\User();
     $res = $userBLL->logout();
+    $url = "Location:../ui/sign_in.php?alert=" . $_GET['alert'];
     if($res == true){
-        header("Location:../ui/user.php");
+        header($url);
     }
 }
 ?>

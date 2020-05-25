@@ -16,7 +16,10 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
             $alert = substr($res, 0, 30) . "...";
         }
     }
+}else{
+    $alert = $_GET['alert'];
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -43,7 +46,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
         
         <form id="form_sign_in" method="post" accept-charset="utf-8" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
             <label for="userMail">Email</label><br>
-            <input type="text" id="userMail" name="userMail" maxlength="255"><br>
+            <input type="text" id="userMail" name="userMail" maxlength="255" value="<?=$_POST['userMail']?>"><br>
             <label for="userPassword">Password</label><br>
             <input type="password" id="userPassword" name="userPassword" maxlength="12"><br>
             <button>Enter</button>

@@ -54,4 +54,10 @@ class User {
             return true;
         }        
     }
+    
+    function changePassword($userDTO,$newPassword){
+        $userDAL = new \DAL\User();
+        $res = $userDAL->changePassword($userDTO, $newPassword);
+        return $res;
+    }
 }
