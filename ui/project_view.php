@@ -14,7 +14,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $funcs = new \BLL\Funcs();
     
     $projectDTO = new \DTO\Project();
-    $projectDTO->setProjectId($_POST['projectId']);
+    $projectDTO->setProjectId($_REQUEST['projectId']);
 
     $projectBLL = new \BLL\Project();
     $res = $projectBLL->selectProject($projectDTO);
@@ -24,6 +24,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $title = $row['title'];
         $contractor = $row['contractor'];
         $projectType = $row['project_type'];
+        if($projectType == 'Single'){ $lock = 'disabled'; }else{ $lock = ''; }
         $visibility = $row['visibility'];
         $initialDate = $funcs->changeDate($row['initial_date'], 0);
         $estimatedDate = $funcs->changeDate($row['estimated_date'], 0);
@@ -32,7 +33,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $projectStatus = $row['project_status'];
     }
 }else{
-    $alert = "The parameter projectID is null";
+    $alert = "The parameter projectId is null";
 }
         
 
@@ -44,6 +45,13 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     <head>
         <meta charset="UTF-8">
         <title>iK | Project view</title>
+        <script>
+            function addMember(id){
+                var projectId = id;
+                var url = "../ui/member_add.php?projectId=" + projectId;
+                window.location.href = url;
+            }
+        </script>
     </head>
     <body>
         <div><?=$logged?>&nbsp;</div>
@@ -73,7 +81,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
             <tr><th>Total Cost</th><td><?=$totalCost?></td></tr>
             <tr><th>Status</th><td><?=$projectStatus?></td></tr>            
         </table>
-        <p>&nbsp;</p>
+        <br>
         <?php
         $memberBLL = new \BLL\Member();
         $memberDTO = new \DTO\Member();
@@ -90,6 +98,11 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                 echo "<tr><td>$userName</td><td>$occupation</td></tr>";
             }
             ?>
+            <tr>
+                <th colspan="2">
+                    <button onclick="addMember(<?=$projectId?>)">Add Member</button>
+                </th>
+            </tr>
         </table>
     </body>
 </html>

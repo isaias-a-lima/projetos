@@ -14,14 +14,13 @@ class Member {
         $cost = $memberDTO->getCost();
         $sql = "CALL MEMBER_INSERT($projectId,$userId,'$occupation',$salary,$cost)";
         $conn = new Connection();
-        $link = $conn->link;
-        mysqli_query($link, $sql);
-        if(mysqli_affected_rows($link) > 0){
-            return mysqli_insert_id($link);
+        $result = $conn->link->query($sql);
+        $res = $result->fetch_array();
+        if($result->num_rows > 0){
+            return $res['out_id'];
         }else{
-            return $sql . "<br>" . mysqli_error($link) . "<br>";
+            return "Erro: $sql <br> " . $conn->link->error . "<br>";
         }
-        mysqli_close($link);
     }
     
     function editMember(){
@@ -37,16 +36,14 @@ class Member {
     }
     
     function listMembers($memberDTO){
-        $projectId = $memberDTO->getProjectId();        
+        $projectId = $memberDTO->getProjectId();
         $sql = "CALL MEMBER_LIST($projectId)";
         $conn = new Connection();
-        $link = $conn->link;
-        $result = mysqli_query($link, $sql);
-        if(mysqli_affected_rows($link) > 0){
+        $result = $conn->link->query($sql);
+        if($result->num_rows > 0){
             return $result;
         }else{
-            return $sql . "<br>" . mysqli_error($link) . "<br>";
+            return $sql . "<br>" . $conn->link->error . "<br>";
         }
-        mysqli_close($link);
     }
 }

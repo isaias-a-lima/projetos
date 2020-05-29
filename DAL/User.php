@@ -8,20 +8,17 @@ class User {
     
     function insertUser($userDTO){
         $signDate = $userDTO->getSignDate();
-        $userName = $userDTO->getUserName();        
+        $userName = $userDTO->getUserName();
         $userMail = $userDTO->getUserMail();
-        $userPassword = $userDTO->getUserPassword();        
+        $userPassword = $userDTO->getUserPassword();
         $sql = "CALL USER_INSERT('$signDate','$userName','$userMail','$userPassword')";
-        
         $conn = new \DAL\Connection();
-        $link = $conn->link;   
-        mysqli_query($link, $sql);
-        if(mysqli_affected_rows($link) > 0){
-            return mysqli_insert_id($link);
+        $res = $conn->link->query($sql);
+        if($res->num_rows > 0){
+            return $res->num_rows;
         }else{
-            return $sql . mysqli_error($link);
+            return $sql . "<BR>" . $conn->link->error;
         }
-        mysqli_close($link);
     }
     
     function editUser($userDTO){
@@ -30,15 +27,12 @@ class User {
         $userMail = $userDTO->getUserMail();
         $userPassword = $userDTO->getUserPassword();
         $sql = "CALL USER_EDIT('$userId','$userName','$userMail','$userPassword')";        
-        $conn = new \DAL\Connection();
-        $link = $conn->link;   
-        mysqli_query($link, $sql);
-        if(mysqli_affected_rows($link) > 0){
-            return mysqli_insert_id($link);
+        $conn = new \DAL\Connection();                
+        if($conn->link->query($sql)){
+            return $userId;
         }else{
-            return $sql . mysqli_error($link);
+            return $sql . "<BR>" . $conn->link->error;
         }
-        mysqli_close($link);
     }
     
     function deleteUser(){
@@ -49,27 +43,24 @@ class User {
         $userId = $userDTO->getUserId();
         $conn = new \DAL\Connection();
         $sql = "CALL USER_SELECT($userId)";
-        $link = $conn->link;
-        $result = mysqli_query($link, $sql);
-        if(mysqli_affected_rows($link) > 0){
+        $result = $conn->link->query($sql);
+        if($result->num_rows > 0){
             return $result;
         }else{
-            return $sql . "<br>" . mysqli_error($link) . "<br>";
+            return $sql . "<br>" . $conn->link->error . "<br>";
         }
-        mysqli_close($link);
     }
     
-    function listUsers(){
-        $sql = "CALL USER_LIST()";
+    function listUsers($userDTO){
+        $userMail = $userDTO->getUserMail();
+        $sql = "CALL USER_LIST('$userMail')";
         $conn = new \DAL\Connection();
-        $link = $conn->link;   
-        $result = mysqli_query($link, $sql);
-        if(mysqli_affected_rows($link) > 0){
+        $result = $conn->link->query($sql);
+        if($result->num_rows > 0){
             return $result;
         }else{
-            return $sql . "<BR>" . mysqli_error($link) . "<BR>";
+            return $sql . "<br>" . $conn->link->error . "<br>";
         }
-        mysqli_close($link);
     }
     
     function login($userDTO){
@@ -77,27 +68,23 @@ class User {
         $password = $userDTO->getUserPassword();
         $conn = new \DAL\Connection();
         $sql = "CALL USER_LOGIN ('$email','$password')";
-        $link = $conn->link;
-        $result = mysqli_query($link, $sql);
-        if(mysqli_affected_rows($link) > 0){
+        $result = $conn->link->query($sql);
+        if($result->num_rows > 0){
             return $result;
         }else{
-            return "Error: " . $sql . "<br>" . mysqli_error($link) . "<br>";
+            return $sql . "<br>" . $conn->link->error . "<br>";
         }
-        mysqli_close($link);
     }
     
     function changePassword($userDTO,$newPassword){
         $userId = $userDTO->getUserId();
         $password = $userDTO->getUserPassword();
         $sql = "CALL USER_CHANGE_PASSWORD($userId,$password,$newPassword)";
-        $conn = new \DAL\Connection();
-        $link = $conn->link;
-        mysqli_query($link, $sql);
-        if(mysqli_affected_rows($link) > 0){
+        $conn = new \DAL\Connection();        
+        if($conn->link->query($sql)){
             return true;
         }else{
-            return "Error: " . $sql . "<br>" . mysqli_error($link) . "<br>";
+            return $sql . "<br>" . $conn->link->error . "<br>";
         }
     }
 }

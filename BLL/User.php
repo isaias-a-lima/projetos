@@ -25,9 +25,9 @@ class User {
         return $userDAL->selectUser($userDTO);
     }
     
-    function listUsers(){
+    function listUsers($userDTO){
         $userDAL = new \DAL\User();
-        return $userDAL->listUsers();
+        return $userDAL->listUsers($userDTO);
     }
     
     function login($userDTO){

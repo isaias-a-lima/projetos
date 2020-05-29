@@ -25,6 +25,8 @@ class Funcs {
     function changeNull($data){
         if(empty($data)){
             return 'NULL';
+        }else{
+            return $data;
         }
     }
 }

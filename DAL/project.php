@@ -18,18 +18,35 @@ class Project {
         $totalCost = $projectDTO->getTotalCost();
         $projectStatus = $projectDTO->getProjectStatus();
         $conn = new \DAL\Connection();
-        $sql = "CALL PROJECTS_INSERT ($userId,'$title','$contractor','$type','$visibility',$initialDate,$estimatedDate,$finalDate,$totalCost,'$projectStatus')";        
-        $link = $conn->link;
-        mysqli_query($link, $sql);
-        if(mysqli_affected_rows($link) > 0){
-            return mysqli_insert_id($link);
+        $sql = "CALL PROJECTS_INSERT ($userId,'$title','$contractor','$type','$visibility',$initialDate,$estimatedDate,$finalDate,$totalCost,'$projectStatus')";
+        $res = $conn->link->query($sql);
+        if($res->num_rows > 0){
+            return $res->num_rows;
         }else{
-            return "Erro: $sql <br> " . mysqli_error($link) . "<br>";
+            return "Erro: $sql <br> " . $conn->link->error . "<br>";
         }            
     }
     
-    function editProject(){
-        
+    function editProject($projectDTO){
+        $projectId = $projectDTO->getProjectId();
+        $userId = $projectDTO->getUserId();
+        $title = $projectDTO->getTitle();
+        $contractor = $projectDTO->getContractor();
+        $type = $projectDTO->getProjectType();
+        $visibility = $projectDTO->getVisibility();
+        $initialDate = $projectDTO->getInitialDate();
+        $estimatedDate = $projectDTO->getEstimatedDate();
+        $finalDate = $projectDTO->getFinalDate();
+        $totalCost = $projectDTO->getTotalCost();
+        $projectStatus = $projectDTO->getProjectStatus();
+        $conn = new \DAL\Connection();
+        $sql = "CALL PROJECT_EDIT ($projectId,'$title','$contractor','$type','$visibility',$initialDate,$estimatedDate,$finalDate,$totalCost,'$projectStatus')";
+        $res = $conn->link->query($sql);
+        if($res->num_rows > 0){
+            return $projectId;
+        }else{
+            return "Erro: $sql <br> " . $conn->link->error . "<br>";
+        }
     }
     
     function deleteProject(){
@@ -40,12 +57,11 @@ class Project {
         $projectId = $projectDTO->getProjectId();
         $conn = new \DAL\Connection();        
         $sql = "CALL PROJECT_SELECT($projectId)";
-        $link = $conn->link;
-        $result = mysqli_query($link, $sql);
-        if(mysqli_affected_rows($link) > 0){
+        $result = $conn->link->query($sql);
+        if($result->num_rows > 0){
             return $result;
         }else{
-            return "Erro: $sql <br> " . mysqli_error($link) . "<br>";
+            return "Erro: $sql <br> " . $conn->link->error . "<br>";
         }        
     }
     
@@ -57,14 +73,12 @@ class Project {
         }else{
             $sql = "CALL PROJECTS_LIST_VISIBILITY('public')";
         }        
-        $link = $conn->link;
-        $result = mysqli_query($link, $sql);
-        if(mysqli_affected_rows($link) > 0){
+        $result = $conn->link->query($sql);
+        if($result->num_rows > 0){
             return $result;
         }else{
-            return "Erro: $sql <br> " . mysqli_error($link) . "<br>";
+            return "Erro: $sql <br> " . $conn->link->error . "<br>";
         }
-        mysqli_close($link);
     }
     
     function calculateTotalCost(){
