@@ -51,6 +51,18 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                 var url = "../ui/member_add.php?projectId=" + projectId;
                 window.location.href = url;
             }
+            
+            function editMember(memberId,projectId){
+                var memberId = memberId;
+                var projectId = projectId;
+                if(memberId.length < 1 && projectId.length > 1){
+                    alert("Parametros invalidos!");
+                }else{
+                    document.getElementById("memberId").value = memberId;
+                    document.getElementById("projectId").value = projectId;
+                    document.getElementById("form_member").submit();
+                }
+            }
         </script>
     </head>
     <body>
@@ -89,20 +101,28 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $res = $memberBLL->listMembers($memberDTO);
         ?>
         <table border="1" cellspacing="0">
-            <tr><th colspan="2">Project Members</th></tr>
-            <tr><th>Nome</th><th>Cargo</th></tr>
+            <tr><th colspan="3">Project Members</th></tr>
+            <tr><th>Nome</th><th>Cargo</th><th>&nbsp;</th></tr>
             <?php
             while($row = $res->fetch_assoc()){
+                $memberId = $row['member_id'];
                 $userName = $row['user_name'];
                 $occupation = $row['occupation'];
-                echo "<tr><td>$userName</td><td>$occupation</td></tr>";
+                echo "<tr><td>$userName</td><td>$occupation</td>";
+                echo "<td><button onclick='editMember($memberId,$projectId)'>Edit</button></tr>";
+                echo "</tr>";
             }
             ?>
             <tr>
-                <th colspan="2">
+                <th colspan="3">
                     <button onclick="addMember(<?=$projectId?>)">Add Member</button>
                 </th>
             </tr>
         </table>
+        
+        <form id="form_member" method="post" accept-charset="utf-8" action="member_edit.php">
+            <input type="hidden" name="memberId" id="memberId">
+            <input type="hidden" name="projectId" id="projectId">
+        </form>
     </body>
 </html>

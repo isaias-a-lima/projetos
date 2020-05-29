@@ -26,16 +26,25 @@ class Member {
         }
     }
     
-    function editMember(){
-        
+    function editMember($memberDTO){
+        $func = new \BLL\Funcs();
+        $salary = $func->changeNull($memberDTO->getSalary());
+        $cost = $func->changeNull($memberDTO->getCost());
+        $memberDTO->setSalary($salary);
+        $memberDTO->setCost($cost);
+        $memberDAL = new \DAL\Member();
+        $res = $memberDAL->editMember($memberDTO);
+        return $res;
     }
     
     function deleteMember(){
         
     }
     
-    function selectMember(){
-        
+    function selectMember($memberDTO){
+        $memberDAL = new \DAL\Member();
+        $res = $memberDAL->selectMember($memberDTO);
+        return $res;
     }
     
     function listMembers($memberDTO){

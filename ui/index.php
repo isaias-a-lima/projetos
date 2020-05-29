@@ -50,7 +50,7 @@ require_once '../BLL/Funcs.php';
         
         <table border="1" cellspacing="0">
             <tr>
-                <th>Title</th><th>Manager</th><th>Type</th><th>Visibility</th><th>Initial Date</th><th>Estimated</th><th>Status</th><th>&nbsp;</th>
+                <th>Title</th><th>Manager</th><!--<th>Type</th><th>Visibility</th><th>Initial Date</th><th>Estimated</th><th>Status</th>--><th>&nbsp;</th>
             </tr>
         <?php
         $funcs = new \BLL\Funcs(); 
@@ -61,11 +61,14 @@ require_once '../BLL/Funcs.php';
             echo "<tr>";
             echo "<td>" . $row['title'] ."</td>";
             echo "<td>" . $row['user_name'] ."</td>";
+            /*
             echo "<td>" . $row['project_type'] ."</td>";
             echo "<td>" . $row['visibility'] ."</td>";
             echo "<td>" . $funcs->changeDate($row['initial_date']) ."</td>";
             echo "<td>" . $funcs->changeDate($row['estimated_date']) ."</td>";
-            echo "<td>" . $row['project_status'] ."</td>";            
+            echo "<td>" . $row['project_status'] ."</td>";
+             * 
+             */
             echo "<td><button type='button' onclick='view(".$row['project_id'].")'>View</button></td>";
             echo "</tr>";
         }
